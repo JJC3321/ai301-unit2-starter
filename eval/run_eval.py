@@ -71,7 +71,8 @@ def grade_one(item_id: str, bundle_path: Path, skill: str, rubric: str,
     for _ in range(2):                       # one retry on bad output
         try:
             proc = subprocess.run(cmd, input=prompt, capture_output=True,
-                                  text=True, timeout=timeout)
+                                  text=True, timeout=timeout,
+                                  encoding="utf-8")
         except subprocess.TimeoutExpired:
             last_err = f"timed out after {timeout}s"
             continue

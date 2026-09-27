@@ -1,53 +1,16 @@
 # Rubric: is this reproduction package ready to post?
 
-<!--
-THIS IS THE PART YOU WRITE. The skill in SKILL.md executes whatever
-checks you define here. It ships empty on purpose: the judgment is your
-work.
-
-A filled rubric must contain:
-
-1. At least one row in the checks table. Each row needs all four
-   columns:
-   - Check: a short name (used in the output JSON).
-   - Evidence: exactly what to look at, and where in the package. Name
-     the part (the claim comment, the repro report's environment
-     record, the artifacts read against the issue's description, the
-     repo-facts block) or a location from your
-     references/evidence-guide.md. "The report" is not a source; "the
-     output excerpt read against the error the issue describes" is.
-   - Pass condition: a decision rule about the OUTCOME that someone
-     else could apply and get your answer. Judge the thing itself (does
-     the artifact show the issue's behavior?), never the write-up's
-     shape (how many steps it has, how long it is, whether it uses a
-     template's headings). Structure-shaped checks are what make
-     graders disagree with themselves.
-   - Weight: `required` (a fail here holds the package) or `preferred`
-     (never changes the verdict).
-
-2. A verdict rule below the table: how the check grades combine into
-   accept (ready) or reject (hold), including how `unclear` is
-   treated. The verdict space is binary. If you write no rule for
-   `unclear`, the skill treats it as fail.
-
-Cover what actually gets bad packages posted. The lecture named the
-proof families: the environment is recorded, the steps are complete
-and followable, the behavior shown matches the issue (not an adjacent
-one), the outcome is stated honestly (an evidenced cannot-reproduce is
-a pass, a confident wrong-target is not), and the words respect the
-repo's conventions. A rubric that ignores a family will fail eval
-packages designed around that family.
--->
-
 ## Checks
 
 | Check | Evidence | Pass condition | Weight |
 |---|---|---|---|
-|  |  |  |  |
+| `env-recorded` | The repro report's environment record (OS, tool/app version, and any driver/runtime the issue depends on), read against the issue's stated target environment. | The report names enough concrete environment facts that a stranger can place the attempt relative to the issue's target (at least tool/app version and OS/platform, plus any driver or backend the issue calls out). An honest cannot-reproduce still passes if it records the environment it tried. Fail when the environment record is missing entirely, or is so thin a stranger cannot tell what was run. | required |
+| `steps-rerunnable` | The repro report's steps (commands, inputs, starting state), read against the issue's trigger description. | A stranger with the named environment can re-run from a stated starting state through the trigger without private/unshared resources, guessed setup, or skipped trigger steps. Fail when steps live only in a private repo/config, omit a required setup fact the issue depends on, or are too vague to execute ("set up the project"). | required |
+| `behavior-matches` | The repro report's artifacts (command output, logs, screenshots, measurements) read against the behavior the issue describes; also any version or setup delta stated in the report vs the issue. | The artifacts show the issue's described behavior (or a clearly labeled cannot-reproduce of that same trigger). Fail when artifacts show an adjacent symptom, a different error class, a graceful validation failure narrated as the reported crash, a silent environment/version deviation that changes what the artifact means, or "success" that only proves the tool runs. | required |
+| `honest-outcome` | The claim comment and repro report's stated result (reproduced / cannot-reproduce / confirmed) read against the artifacts and steps actually shown. | The stated outcome matches the evidence: a reproduced claim has artifacts of the issue's behavior; an honest cannot-reproduce names what was tried and what differed. Fail when the package asserts confirmation, root cause, or universality with no supporting artifact, or narrates certainty over the wrong target. | required |
+| `claim-specific` | The candidate claim comment, read against the issue title/body and the repo-facts contribution conventions. | The claim names this issue specifically, states a concrete next step or intent, and does not over-promise. Fail on interchangeable assign-me boilerplate, pure +1/me-too with no intent, or guarantees the author cannot keep (e.g. "fix in 2 days guaranteed"). | required |
+| `ai-disclosure` | The repo-facts contribution / AI policy line, plus the claim comment and repro report text. | If the policy requires disclosing AI usage, at least one of the comments discloses the tool and that the human verified the work. If the policy is silent, permissive, or only asks for human understanding without a disclosure rule, this check passes. Course packages are treated as AI-assisted work whenever disclosure is required. | required |
 
 ## Verdict rule
 
-<!-- State how the grades above combine into accept or reject, and how
-unclear is treated. Example shape (write your own): "accept if every
-required check passes; preferred checks never change the verdict;
-unclear counts as fail." -->
+Accept only if every `required` check grades `pass`. Any required `fail` or `unclear` makes the verdict `reject`. Preferred checks (none in this rubric) never change the verdict.

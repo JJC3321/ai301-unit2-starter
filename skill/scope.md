@@ -15,7 +15,7 @@ Staff wrote this file. It ships filled; you do not edit it this week.
 Only issues in the course's Path Review repository are in scope this
 week:
 
-- Repo: `<ORG>/<PATH-REVIEW-REPO>` <!-- paste your section's repo from the Unit 1 Assignment tab -->
+- Repo: `codepath/pathreview-ai301-fa26-s3`
 
 If the repo line above still reads as a bracketed placeholder, your
 cohort's copy has not been finalized: stop and ask your instructor for
