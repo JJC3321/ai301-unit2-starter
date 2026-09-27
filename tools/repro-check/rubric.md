@@ -1,0 +1,16 @@
+# Rubric: is this reproduction package ready to post?
+
+## Checks
+
+| Check | Evidence | Pass condition | Weight |
+|---|---|---|---|
+| `env-recorded` | The repro report's environment record (OS, tool/app version, and any driver/runtime the issue depends on), read against the issue's stated target environment. | The report names enough concrete environment facts that a stranger can place the attempt relative to the issue's target (at least tool/app version and OS/platform, plus any driver or backend the issue calls out). An honest cannot-reproduce still passes if it records the environment it tried. Fail when the environment record is missing entirely, or is so thin a stranger cannot tell what was run. | required |
+| `steps-rerunnable` | The repro report's steps (commands, inputs, starting state), read against the issue's trigger description. | A stranger with the named environment can re-run from a stated starting state through the trigger without private/unshared resources, guessed setup, or skipped trigger steps. Fail when steps live only in a private repo/config, omit a required setup fact the issue depends on, or are too vague to execute ("set up the project"). | required |
+| `behavior-matches` | The repro report's artifacts (command output, logs, screenshots, measurements) read against the behavior the issue describes; also any version or setup delta stated in the report vs the issue. | The artifacts show the issue's described behavior (or a clearly labeled cannot-reproduce of that same trigger). Fail when artifacts show an adjacent symptom, a different error class, a graceful validation failure narrated as the reported crash, a silent environment/version deviation that changes what the artifact means, or "success" that only proves the tool runs. | required |
+| `honest-outcome` | The claim comment and repro report's stated result (reproduced / cannot-reproduce / confirmed) read against the artifacts and steps actually shown. | The stated outcome matches the evidence: a reproduced claim has artifacts of the issue's behavior; an honest cannot-reproduce names what was tried and what differed. Fail when the package asserts confirmation, root cause, or universality with no supporting artifact, or narrates certainty over the wrong target. | required |
+| `claim-specific` | The candidate claim comment, read against the issue title/body and the repo-facts contribution conventions. | The claim names this issue specifically, states a concrete next step or intent, and does not over-promise. Fail on interchangeable assign-me boilerplate, pure +1/me-too with no intent, or guarantees the author cannot keep (e.g. "fix in 2 days guaranteed"). | required |
+| `ai-disclosure` | The repo-facts contribution / AI policy line, plus the claim comment and repro report text. | If the policy requires disclosing AI usage, at least one of the comments discloses the tool and that the human verified the work. If the policy is silent, permissive, or only asks for human understanding without a disclosure rule, this check passes. Course packages are treated as AI-assisted work whenever disclosure is required. | required |
+
+## Verdict rule
+
+Accept only if every `required` check grades `pass`. Any required `fail` or `unclear` makes the verdict `reject`. Preferred checks (none in this rubric) never change the verdict.
